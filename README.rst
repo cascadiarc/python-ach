@@ -18,7 +18,7 @@ Below is an example of how to use the module:
     from ach.builder import AchFile
 
     settings = {
-        'immediate_dest' : '123456789', # Your bank's routing number 
+        'immediate_dest' : '123456789', # Your bank's routing number
         'immediate_org' : '123456789', # Bank assigned routing number
         'immediate_dest_name' : 'YOUR BANK',
         'immediate_org_name' : 'YOUR COMPANY',
@@ -56,21 +56,23 @@ Below is an example of how to use the module:
         },
     ]
 
-    ach_file.add_batch('PPD', entries, credits=True, debits=True)
+    ach_file.add_batch('CCD', entries, credits=True, debits=True, company_entry_desc='TEST')
 
-    print ach_file.render_to_string()
+    print(ach_file.render_to_string())
+
+
 
 This returns the following NACHA file:
 
 ::
 
-    101 123456780 1234567801409020123A094101YOUR BANK              YOUR COMPANY                   
-    5200YOUR COMPANY                        1234567890PPDPAYROLL         140903   1123456780000001
+    101 123456789 1234567892001301846A094101YOUR BANK              YOUR COMPANY
+    5200YOUR COMPANY                        1234567890CCDTEST            200131   1123456780000001
     62212345678011232132         0000001000               ALICE WANDERDUST        1123456780000001
-    705HERE IS SOME ADDITIONAL INFORMATION                                             00000000001
+    705HERE IS SOME ADDITIONAL INFORMATION                                             00010000001
     627123456780234234234        0000015000               BILLY HOLIDAY           0123456780000002
-    622123232318123123123        0000001213               RACHEL WELCH            0123456780000003
+    622123232315123123123        0000001213               RACHEL WELCH            0123456780000003
     820000000400370145870000000150000000000022131234567890                         123456780000001
-    9000001000001000000040037014587000000015000000000002213                                       
+    9000001000001000000040037014587000000015000000000002213
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
