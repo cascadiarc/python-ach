@@ -31,6 +31,7 @@ Below is an example of how to use the module:
         {
             'type'           : '22', # type of
             'routing_number' : '12345678',
+            'id_number'      : '0123456789ABCDEF'
             'account_number' : '11232132',
             'amount'         : '10.00',
             'name'           : 'Alice Wanderdust',
@@ -68,7 +69,7 @@ This returns the following NACHA file:
 
     101 123456789 1234567892001301846A094101YOUR BANK              YOUR COMPANY
     5200YOUR COMPANY                        1234567890CCDTEST            200131   1123456780000001
-    62212345678011232132         0000001000               ALICE WANDERDUST        1123456780000001
+    62212345678011232132         00000010000123456789ABCDEALICE WANDERDUST        1123456780000001
     705HERE IS SOME ADDITIONAL INFORMATION                                             00010000001
     627123456780234234234        0000015000               BILLY HOLIDAY           0123456780000002
     622123232315123123123        0000001213               RACHEL WELCH            0123456780000003
