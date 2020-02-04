@@ -80,7 +80,7 @@ class AchFile(object):
         entry_counter = 1
 
         for record in batch_entries:
-
+            
             entry = EntryDetail(std_ent_cls_code)
 
             entry.transaction_code = record.get('type')
@@ -92,6 +92,8 @@ class AchFile(object):
                 entry.check_digit = record['routing_number'][8]
 
             entry.dfi_acnt_num = record['account_number']
+            if 'id_number' in record:
+                entry.id_number = record['id_number']
             entry.amount = int(round(float(record['amount']) * 100))
             entry.ind_name = record['name'].upper()[:22]
             entry.trace_num = self.settings['immediate_dest'][:8] \
