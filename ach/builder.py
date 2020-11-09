@@ -26,12 +26,14 @@ class AchFile(object):
             self.header = Header(
                 settings['immediate_dest'],
                 settings['immediate_org'], file_id_mod,
-                settings['immediate_dest_name'], settings['immediate_org_name']
+                settings['immediate_dest_name'],
+                settings['orig_dfi_id'],
+                settings['immediate_org_name']
             )
         except KeyError:
             raise Exception(
                 'Settings require: "immediate_dest", "immediate_org", \
-                immediate_dest_name", and "immediate_org_name"'
+                "immediate_dest_name", "orig_dfi_id", and "immediate_org_name"'
             )
 
         self.batches = list()
@@ -72,7 +74,7 @@ class AchFile(object):
             desc_date='',
             eff_ent_date=eff_ent_date.strftime('%y%m%d'),  # YYMMDD
             orig_stat_code='1',
-            orig_dfi_id=self.settings['immediate_dest'][:8],
+            orig_dfi_id=self.settings['orig_dfi_id'][:8], #AUT-140
             company_name=self.settings['immediate_org_name']
         )
 
@@ -96,7 +98,7 @@ class AchFile(object):
                 entry.id_number = record['id_number']
             entry.amount = int(round(float(record['amount']) * 100))
             entry.ind_name = record['name'].upper()[:22]
-            entry.trace_num = self.settings['immediate_dest'][:8] \
+            entry.trace_num = self.settings['orig_dfi_id'][:8] \
                 + entry.validate_numeric_field(entry_counter, 7)
 
             entries.append((entry, record.get('addenda', [])))

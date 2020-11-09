@@ -29,3 +29,9 @@ pip-log.txt
 #Vim swp
 *.swp
 .idea
+
+# VS code
+*.code-workspace
+
+#pyenv
+.python-version
