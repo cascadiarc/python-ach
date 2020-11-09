@@ -27,9 +27,9 @@ class AchFile(object):
                 settings['immediate_dest'],
                 settings['immediate_org'], file_id_mod,
                 settings['immediate_dest_name'],
-                settings['orig_dfi_id'],
                 settings['immediate_org_name']
             )
+            settings['orig_dfi_id']
         except KeyError:
             raise Exception(
                 'Settings require: "immediate_dest", "immediate_org", \
